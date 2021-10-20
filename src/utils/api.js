@@ -10,6 +10,12 @@ export const getUsers = () => {
   });
 };
 
+export const getUserByName = (username) => {
+  return ncNewsApi.get(`/users/${username}`).then(({ data }) => {
+    return data;
+  });
+};
+
 export const getArticles = () => {
   return ncNewsApi.get("/articles").then(({ data }) => {
     return data;

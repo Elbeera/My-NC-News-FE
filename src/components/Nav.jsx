@@ -13,7 +13,7 @@ const Label = styled.label`
   padding: 0px 10px 0px 30px;
 `;
 
-const Nav = () => {
+const Nav = ({ setCurrentFilter }) => {
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -29,11 +29,21 @@ const Nav = () => {
   return (
     <Section>
       <Label htmlFor="topics">Topics: </Label>
-      <select name="topics" id="">
-        <option value="all">All</option>
+
+      <select
+        name="select-topic"
+        id="select-topic"
+        onChange={(e) => {
+          console.log(e.target);
+          const filter = e.target.value;
+          setCurrentFilter(filter === "All" ? null : filter);
+        }}
+      >
+        <option value="All">All</option>
+
         {topics.map((topic) => {
           return (
-            <option value="topic" key={topic.topic_id}>
+            <option value={topic.topic} key={topic.topic_id}>
               {topic.slug}
             </option>
           );

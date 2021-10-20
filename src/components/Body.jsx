@@ -19,9 +19,9 @@ const Section = styled.section`
   padding: 10px;
 `;
 
-const Body = () => {
+const Body = ({ currentFilter }) => {
   const [articles, setArticles] = useState([]);
-
+  console.log(currentFilter);
   useEffect(() => {
     getArticles()
       .then((articlesFromApi) => {
@@ -30,12 +30,15 @@ const Body = () => {
       .catch((err) => {
         console.dir(err);
       });
-  }, []);
+  }, [currentFilter]);
 
   return (
     <Section>
       <ul>
-        {articles.map((article) => {
+        {(currentFilter
+          ? articles.filter((article) => article.topic === currentFilter)
+          : articles
+        ).map((article) => {
           return (
             <List key={article.article_id}>
               <Article>Article Title:</Article> {article.title}.<br />
@@ -49,7 +52,7 @@ const Body = () => {
               {article.created_at.substr(0, 10)}
               <br />
               <button>
-                <Article>Votes:</Article>
+                <Article>Votes: </Article>
                 {article.votes}
               </button>
             </List>

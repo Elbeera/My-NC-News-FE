@@ -11,12 +11,23 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const Header = () => {
+const Header = ({ user, setUser }) => {
+  console.log(user);
   return (
     <Section>
       <Link to="/">
         <Title>NorthCoder's News!</Title>
       </Link>
+      {user && <p>Signed in as: {user.users[0].username}</p>}
+      {user && (
+        <button
+          onClick={() => {
+            setUser(null);
+          }}
+        >
+          Sign Out
+        </button>
+      )}
     </Section>
   );
 };

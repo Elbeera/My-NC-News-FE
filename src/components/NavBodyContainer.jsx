@@ -1,11 +1,13 @@
 import Body from "./Body";
 import Nav from "./Nav";
+import { useState } from "react";
 
 const NavBodyContainer = () => {
+  const [currentFilter, setCurrentFilter] = useState(null);
   return (
     <>
-      <Nav />
-      <Body />
+      <Nav setCurrentFilter={setCurrentFilter} />
+      <Body currentFilter={currentFilter} />
     </>
   );
 };

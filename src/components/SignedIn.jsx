@@ -2,10 +2,10 @@ import Header from "./Header";
 import NavBodyContainer from "./NavBodyContainer";
 import Footer from "./Footer";
 
-const SignedIn = () => {
+const SignedIn = ({ user, setUser }) => {
   return (
     <div className="App">
-      <Header />
+      <Header user={user} setUser={setUser} />
       <NavBodyContainer />
       <Footer />
     </div>
