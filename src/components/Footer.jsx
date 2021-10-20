@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Section = styled.section`
-  margin-top: 30px;
+  margin: 30px;
   text-align: center;
 `;
 

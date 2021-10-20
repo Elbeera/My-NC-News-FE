@@ -3,15 +3,13 @@ import Footer from "./Footer";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getUsers } from "../utils/api";
+import { UserContext } from "../context/User";
+import { useContext } from "react";
 
 const Section = styled.section`
   background-color: lightgreen;
-  height: 90vh;
-`;
-
-const Div = styled.div`
+  height: 800px;
   text-align: center;
-  margin-top: 50%;
 `;
 
 const Button = styled.button`
@@ -20,47 +18,57 @@ const Button = styled.button`
 
 const Sub = styled.p`
   text-align: center;
-  margin-top: 50px;
+  margin-top: 500px;
   font-weight: bold;
 `;
 
 const HomePage = () => {
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState(null);
+  const [ourUsers, setOurUsers] = useState([]);
+  const [newUser, setNewUser] = useState("");
+  const { setUser } = useContext(UserContext);
 
-  console.log(users);
+  function signIn(e) {
+    e.preventDefault();
+    const form = e.target;
+    const userToAdd = form.signIn.value;
+    console.log(userToAdd);
+    console.log(ourUsers);
+    const checkUser = ourUsers.users.filter((user) => {
+      return user.username === userToAdd;
+    });
+    if (checkUser.length !== 0) {
+      setUser(checkUser[0].username);
+    }
+  }
 
   useEffect(() => {
     getUsers()
       .then((usersFromApi) => {
-        setUsers(usersFromApi);
+        setOurUsers(usersFromApi);
       })
       .catch((err) => {
         console.dir(err);
       });
   }, []);
 
-  function 
-
   return (
     <>
       <Section>
         <Header />
-        <Div>
-          <h2>Please Sign In Below! </h2>
-          <form action="">
-            <label htmlFor="signIn">Username: </label>
-            <input type="text" 
-            required 
-            name="username" 
-            value={user}
+        <h2>Please Sign In Below! </h2>
+        <form action="" onSubmit={signIn}>
+          <label htmlFor="signIn">Username: </label>
+          <input
+            type="text"
+            required
+            name="signIn"
+            value={newUser}
             onChange={(e) => {
-                checkUser(e.target.value)
+              setNewUser(e.target.value);
             }}
-            />
-            <Button type="submit">Log in</Button>
-          </form>
-        </Div>
+          />
+          <Button type="submit">Log in</Button>
+        </form>
         <Sub>Thank you for visiting our webpage!</Sub>
       </Section>
       <Footer />
