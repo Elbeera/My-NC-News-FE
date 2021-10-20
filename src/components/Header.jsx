@@ -12,7 +12,6 @@ const Title = styled.h1`
 `;
 
 const Header = ({ user, setUser }) => {
-  console.log(user);
   return (
     <Section>
       <Link to="/">

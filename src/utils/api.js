@@ -16,14 +16,20 @@ export const getUserByName = (username) => {
   });
 };
 
+export const getTopics = () => {
+  return ncNewsApi.get("/topics").then(({ data }) => {
+    return data;
+  });
+};
+
 export const getArticles = () => {
   return ncNewsApi.get("/articles").then(({ data }) => {
     return data;
   });
 };
 
-export const getTopics = () => {
-  return ncNewsApi.get("/topics").then(({ data }) => {
+export const getCommentsByArticleId = (article_id) => {
+  return ncNewsApi.get(`/articles/${article_id}/comments`).then(({ data }) => {
     return data;
   });
 };

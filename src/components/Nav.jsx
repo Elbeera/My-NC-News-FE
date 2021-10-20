@@ -34,7 +34,6 @@ const Nav = ({ setCurrentFilter }) => {
         name="select-topic"
         id="select-topic"
         onChange={(e) => {
-          console.log(e.target);
           const filter = e.target.value;
           setCurrentFilter(filter === "All" ? null : filter);
         }}
