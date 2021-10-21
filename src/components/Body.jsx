@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { UserContext } from "../context/User";
 import { getArticles, getCommentsByArticleId } from "../utils/api";
 import styled from "styled-components";
 
-const Body = ({ currentFilter }) => {
+const Body = ({ currentFilter, article, setArticle }) => {
+  const { user } = useContext(UserContext);
   const [articles, setArticles] = useState([]);
-  const [article, setArticle] = useState(null);
   const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [myComments, setMyComments] = useState([]);
-  console.log(myComments);
 
-  // setError(null); Causes website crash
+  console.log(user);
 
   useEffect(() => {
     getArticles()
       .then((articlesFromApi) => {
+        setError(null);
         setArticles(articlesFromApi.articles);
         setIsLoading(false);
       })
@@ -22,11 +24,12 @@ const Body = ({ currentFilter }) => {
         setIsLoading(false);
         setError(err);
       });
-  }, [currentFilter]);
+  }, []);
 
   function viewComments(article_id) {
     getCommentsByArticleId(article_id)
       .then((commentsFromApi) => {
+        setError(null);
         setMyComments(commentsFromApi);
         setIsLoading(false);
       })
@@ -54,6 +57,7 @@ const Body = ({ currentFilter }) => {
             {article.created_at.substr(0, 10)}
           </List>
           <h2>Comments: </h2>
+
           <ul>
             {/* {myComments.comments.map((comment) => {
               return (
@@ -65,6 +69,7 @@ const Body = ({ currentFilter }) => {
               );
             })} */}
           </ul>
+          <form action=""></form>
         </>
       ) : (
         <ul>
