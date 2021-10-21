@@ -19,7 +19,7 @@ const PageTitle = styled.h1`
   margin: 0;
 `;
 
-const Nav = ({ setCurrentFilter, article, setArticle }) => {
+const Nav = ({ setCurrentFilter, article, setArticle, setViewComments }) => {
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -68,6 +68,7 @@ const Nav = ({ setCurrentFilter, article, setArticle }) => {
           <button
             onClick={() => {
               setArticle(null);
+              setViewComments(false);
             }}
           >
             Go back to all Articles

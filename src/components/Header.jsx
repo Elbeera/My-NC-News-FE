@@ -17,6 +17,10 @@ const ProfileImage = styled.img`
   margin-bottom: 10px;
 `;
 
+const Greeting = styled.p`
+  font-weight: bold;
+`;
+
 const Header = ({ user, setUser }) => {
   return (
     <Section>
@@ -25,7 +29,7 @@ const Header = ({ user, setUser }) => {
       </Link>
       {user && (
         <>
-          <p>Welcome {user.users[0].username}!</p>{" "}
+          <Greeting>Welcome {user.users[0].username}!</Greeting>{" "}
           <ProfileImage src={user.users[0].avatar_url} alt="users profile" />{" "}
           <br />
         </>
