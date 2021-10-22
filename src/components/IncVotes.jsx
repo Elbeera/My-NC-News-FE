@@ -1,5 +1,17 @@
 import { useState } from "react";
 import { patchCommentVotes, patchArticleVotes } from "../utils/api";
+import styled from "styled-components";
+
+const VoteBox = styled.p`
+  padding: 0;
+  margin: 0 0 5px 0;
+`;
+
+const Thumb = styled.span`
+  padding: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+`;
 
 export const CommentVoter = ({ votes, id }) => {
   const [newVote, setNewVote] = useState(0);
@@ -11,7 +23,6 @@ export const CommentVoter = ({ votes, id }) => {
       .then((apiResponse) => {
         setError(false);
         setNewVote((currVotes) => currVotes + 1);
-        console.log(apiResponse);
       })
       .catch((err) => {
         setNewVote((currVotes) => currVotes - 1);
@@ -25,7 +36,6 @@ export const CommentVoter = ({ votes, id }) => {
       .then((apiResponse) => {
         setError(false);
         setNewVote((currVotes) => currVotes - 1);
-        console.log(apiResponse);
       })
       .catch((err) => {
         setNewVote((currVotes) => currVotes + 1);
@@ -35,20 +45,15 @@ export const CommentVoter = ({ votes, id }) => {
 
   return (
     <>
-      <p>
-        <button onClick={handleIncVote}>
-          {votes + newVote}
-          <span role="img" aria-label="thumbs_up">
-            👍
-          </span>
-        </button>
-        <button onClick={handleDecVote}>
-          {votes + newVote}
-          <span role="img" aria-label="thumbs_down">
-            👎
-          </span>
-        </button>
-      </p>
+      <VoteBox>
+        <Thumb role="img" aria-label="thumbs_up" onClick={handleIncVote}>
+          👍
+        </Thumb>
+        {votes + newVote}
+        <Thumb role="img" aria-label="thumbs_down" onClick={handleDecVote}>
+          👎
+        </Thumb>
+      </VoteBox>
       {error && <p>Sorry, please try again!</p>}
     </>
   );
@@ -65,7 +70,6 @@ export const ArticleVoter = ({ votes, id }) => {
       .then((apiResponse) => {
         setError(false);
         setNewVote((currVotes) => currVotes - 1);
-        console.log(apiResponse);
       })
       .catch((err) => {
         setNewVote((currVotes) => currVotes + 1);
@@ -79,7 +83,6 @@ export const ArticleVoter = ({ votes, id }) => {
       .then((apiResponse) => {
         setError(false);
         setNewVote((currVotes) => currVotes + 1);
-        console.log(apiResponse);
       })
       .catch((err) => {
         setNewVote((currVotes) => currVotes - 1);
@@ -89,20 +92,15 @@ export const ArticleVoter = ({ votes, id }) => {
 
   return (
     <>
-      <p>
-        <button onClick={handleIncVote}>
-          {votes + newVote}
-          <span role="img" aria-label="thumbs_up">
-            👍
-          </span>
-        </button>
-        <button onClick={handleDecVote}>
-          {votes + newVote}
-          <span role="img" aria-label="thumbs_down">
-            👎
-          </span>
-        </button>
-      </p>
+      <VoteBox>
+        <Thumb role="img" aria-label="thumbs_up" onClick={handleIncVote}>
+          👍
+        </Thumb>
+        {votes + newVote}
+        <Thumb role="img" aria-label="thumbs_down" onClick={handleDecVote}>
+          👎
+        </Thumb>
+      </VoteBox>
       {error && <p>Sorry, please try again!</p>}
     </>
   );

@@ -60,6 +60,7 @@ const Body = ({
   const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [myComments, setMyComments] = useState([]);
+  const [didVote, setDidVote] = useState(false);
 
   useEffect(() => {
     getArticles()
@@ -139,8 +140,9 @@ const Body = ({
                     <CommentList>Date Created:</CommentList>
                     {comment.created_at.substr(0, 10)}
                     <br />
+                    <br />
                     <CommentList>
-                      Votes: {comment.votes}
+                      Votes:{" "}
                       <CommentVoter
                         votes={comment.votes}
                         id={comment.comment_id}
@@ -171,6 +173,7 @@ const Body = ({
                 <Article>Topic:</Article> {article.topic}
                 <br />
                 <Article>Article Body:</Article> {article.body}
+                <br />
                 <br />
                 <Article>
                   Votes:
