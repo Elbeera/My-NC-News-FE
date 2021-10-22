@@ -41,3 +41,15 @@ export const postComment = (comment, article_id) => {
       return data;
     });
 };
+
+export const patchCommentVotes = (voteObj, comment_id) => {
+  return ncNewsApi.patch(`comments/${comment_id}`, voteObj).then(({ data }) => {
+    return data;
+  });
+};
+
+export const patchArticleVotes = (voteObj, article_id) => {
+  return ncNewsApi.patch(`articles/${article_id}`, voteObj).then(({ data }) => {
+    return data;
+  });
+};

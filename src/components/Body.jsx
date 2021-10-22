@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "../context/User";
 import { getArticles, getCommentsByArticleId, postComment } from "../utils/api";
+import { CommentVoter, ArticleVoter } from "./IncVotes";
 import styled from "styled-components";
 
 const Article = styled.span`
@@ -15,13 +16,13 @@ const CommentList = styled.span`
 const List = styled.li`
   border: black solid;
   list-style-type: none;
-  margin: 10px;
+  margin: 10px auto;
 `;
 
 const EachComment = styled.li`
   border: blue solid;
   list-style-type: none;
-  margin: 10px;
+  margin: 10px auto;
 `;
 
 const Section = styled.section`
@@ -96,15 +97,10 @@ const Body = ({
       username: user.users[0].username,
       body: insertedComment,
     };
-    // console.log(commentToPost);
-    // console.log(article.article_id);
-    console.log(myComments.comments);
 
     postComment(commentToPost, article.article_id)
       .then((response) => {
-        console.log(response);
         setMyComments((currentComments) => {
-          console.log(currentComments);
           return [...currentComments, response.comment];
         });
         setError(null);
@@ -120,7 +116,7 @@ const Body = ({
       {loading && <p>Loading.....</p>}
       {article ? (
         <>
-          <List>
+          <List key={article.article_id}>
             <Article>Article Title:</Article> {article.title}.<br />
             <Article>Topic:</Article> {article.topic}
             <br />
@@ -143,10 +139,13 @@ const Body = ({
                     <CommentList>Date Created:</CommentList>
                     {comment.created_at.substr(0, 10)}
                     <br />
-                    <button>
-                      <CommentList>Votes: </CommentList>
-                      {comment.votes}
-                    </button>
+                    <CommentList>
+                      Votes: {comment.votes}
+                      <CommentVoter
+                        votes={comment.votes}
+                        id={comment.comment_id}
+                      />
+                    </CommentList>
                   </li>
                 </EachComment>
               );
@@ -173,11 +172,10 @@ const Body = ({
                 <br />
                 <Article>Article Body:</Article> {article.body}
                 <br />
-                <button>
-                  <Article>Votes: </Article>
-                  {article.votes}
-                </button>
-                <br />
+                <Article>
+                  Votes:
+                  <ArticleVoter votes={article.votes} id={article.article_id} />
+                </Article>
                 <button
                   onClick={() => {
                     setArticle(article);
