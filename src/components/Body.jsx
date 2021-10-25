@@ -132,23 +132,21 @@ const Body = ({
           <ul>
             {myComments.map((comment) => {
               return (
-                <EachComment>
-                  <li key={comment.comment_id}>
-                    <CommentList>Author: </CommentList> {comment.author} <br />
-                    <CommentList>Comment: </CommentList> {comment.body}
-                    <br />
-                    <CommentList>Date Created:</CommentList>
-                    {comment.created_at.substr(0, 10)}
-                    <br />
-                    <br />
-                    <CommentList>
-                      Votes:{" "}
-                      <CommentVoter
-                        votes={comment.votes}
-                        id={comment.comment_id}
-                      />
-                    </CommentList>
-                  </li>
+                <EachComment key={comment.comment_id}>
+                  <CommentList>Author: </CommentList> {comment.author} <br />
+                  <CommentList>Comment: </CommentList> {comment.body}
+                  <br />
+                  <CommentList>Date Created:</CommentList>
+                  {comment.created_at.substr(0, 10)}
+                  <br />
+                  <br />
+                  <CommentList>
+                    Votes:{" "}
+                    <CommentVoter
+                      votes={comment.votes}
+                      id={comment.comment_id}
+                    />
+                  </CommentList>
                 </EachComment>
               );
             })}

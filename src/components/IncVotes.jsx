@@ -7,38 +7,41 @@ const VoteBox = styled.p`
   margin: 0 0 5px 0;
 `;
 
-const Thumb = styled.span`
-  padding: 10px;
-  margin-right: 5px;
+const Thumb = styled.button`
+  margin: 5px 10px 5px 5px;
+  background-color: Transparent;
+  border: none;
   cursor: pointer;
 `;
 
 export const CommentVoter = ({ votes, id }) => {
-  const [newVote, setNewVote] = useState(0);
+  const [newVote, setNewVote] = useState(votes);
   const [error, setError] = useState(false);
+  const [upDisable, setUpDisable] = useState(false);
+  const [downDisable, setDownDisable] = useState(false);
+  console.log(upDisable);
+
   function handleIncVote() {
     const incObj = { inc_votes: 1 };
 
     patchCommentVotes(incObj, id)
       .then((apiResponse) => {
         setError(false);
-        setNewVote((currVotes) => currVotes + 1);
+        setNewVote(apiResponse.comment.votes);
       })
       .catch((err) => {
-        setNewVote((currVotes) => currVotes - 1);
         setError(true);
       });
   }
-  function handleDecVote() {
+  function handleDecVote(e) {
     const incObj = { inc_votes: -1 };
 
     patchCommentVotes(incObj, id)
       .then((apiResponse) => {
         setError(false);
-        setNewVote((currVotes) => currVotes - 1);
+        setNewVote(apiResponse.comment.votes);
       })
       .catch((err) => {
-        setNewVote((currVotes) => currVotes + 1);
         setError(true);
       });
   }
@@ -46,11 +49,27 @@ export const CommentVoter = ({ votes, id }) => {
   return (
     <>
       <VoteBox>
-        <Thumb role="img" aria-label="thumbs_up" onClick={handleIncVote}>
+        <Thumb
+          disabled={upDisable}
+          role="img"
+          aria-label="thumbs_up"
+          onClick={() => {
+            handleIncVote();
+            setUpDisable(true);
+          }}
+        >
           👍
         </Thumb>
         {votes + newVote}
-        <Thumb role="img" aria-label="thumbs_down" onClick={handleDecVote}>
+        <Thumb
+          disabled={downDisable}
+          role="img"
+          aria-label="thumbs_down"
+          onClick={() => {
+            handleDecVote();
+            setDownDisable(true);
+          }}
+        >
           👎
         </Thumb>
       </VoteBox>
@@ -60,8 +79,10 @@ export const CommentVoter = ({ votes, id }) => {
 };
 
 export const ArticleVoter = ({ votes, id }) => {
-  const [newVote, setNewVote] = useState(0);
+  const [newVote, setNewVote] = useState(votes);
   const [error, setError] = useState(false);
+  const [upDisable, setUpDisable] = useState(false);
+  const [downDisable, setDownDisable] = useState(false);
 
   function handleDecVote() {
     const incObj = { inc_votes: -1 };
@@ -69,10 +90,9 @@ export const ArticleVoter = ({ votes, id }) => {
     patchArticleVotes(incObj, id)
       .then((apiResponse) => {
         setError(false);
-        setNewVote((currVotes) => currVotes - 1);
+        setNewVote(apiResponse.article.votes);
       })
       .catch((err) => {
-        setNewVote((currVotes) => currVotes + 1);
         setError(true);
       });
   }
@@ -82,10 +102,9 @@ export const ArticleVoter = ({ votes, id }) => {
     patchArticleVotes(incObj, id)
       .then((apiResponse) => {
         setError(false);
-        setNewVote((currVotes) => currVotes + 1);
+        setNewVote(apiResponse.article.votes);
       })
       .catch((err) => {
-        setNewVote((currVotes) => currVotes - 1);
         setError(true);
       });
   }
@@ -93,11 +112,27 @@ export const ArticleVoter = ({ votes, id }) => {
   return (
     <>
       <VoteBox>
-        <Thumb role="img" aria-label="thumbs_up" onClick={handleIncVote}>
+        <Thumb
+          disabled={upDisable}
+          role="img"
+          aria-label="thumbs_up"
+          onClick={() => {
+            handleIncVote();
+            setUpDisable(true);
+          }}
+        >
           👍
         </Thumb>
-        {votes + newVote}
-        <Thumb role="img" aria-label="thumbs_down" onClick={handleDecVote}>
+        {newVote}
+        <Thumb
+          disabled={downDisable}
+          role="img"
+          aria-label="thumbs_down"
+          onClick={() => {
+            handleDecVote();
+            setDownDisable(true);
+          }}
+        >
           👎
         </Thumb>
       </VoteBox>

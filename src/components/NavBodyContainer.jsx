@@ -4,12 +4,14 @@ import { useState } from "react";
 
 const NavBodyContainer = () => {
   const [currentFilter, setCurrentFilter] = useState(null);
+  // const [currSortyBy, setSortBy] = useState(null);
   const [article, setArticle] = useState(null);
   const [viewComments, setViewComments] = useState(false);
 
   return (
     <>
       <Nav
+        // setSortBy={}
         setCurrentFilter={setCurrentFilter}
         article={article}
         setArticle={setArticle}

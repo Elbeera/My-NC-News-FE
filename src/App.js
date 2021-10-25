@@ -18,7 +18,7 @@ function App() {
         </Route>
         <Route exact path="/signedIn">
           <SignedIn user={user} setUser={setUser} />
-          {!user && <Redirect to="/" />}
+          {/* {!user && <Redirect to="/" />} */}
         </Route>
       </Switch>
     </Router>
