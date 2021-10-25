@@ -19,7 +19,6 @@ export const CommentVoter = ({ votes, id }) => {
   const [error, setError] = useState(false);
   const [upDisable, setUpDisable] = useState(false);
   const [downDisable, setDownDisable] = useState(false);
-  console.log(upDisable);
 
   function handleIncVote() {
     const incObj = { inc_votes: 1 };

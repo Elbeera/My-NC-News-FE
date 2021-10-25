@@ -29,7 +29,7 @@ const Header = ({ user, setUser }) => {
       </Link>
       {user && (
         <>
-          <Greeting>Welcome {user.users[0].username}!</Greeting>{" "}
+          <Greeting>Welcome {user.users[0].name}!</Greeting>{" "}
           <ProfileImage src={user.users[0].avatar_url} alt="users profile" />{" "}
           <br />
         </>
@@ -37,7 +37,7 @@ const Header = ({ user, setUser }) => {
       {user && (
         <button
           onClick={() => {
-            setUser(null);
+            setUser("");
           }}
         >
           Sign Out

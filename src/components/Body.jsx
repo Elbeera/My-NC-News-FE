@@ -13,16 +13,28 @@ const CommentList = styled.span`
   font-weight: bold;
 `;
 
+const DeleteButton = styled.button`
+  margin: 5px;
+  background-color: Transparent;
+  font-weight: bold;
+`;
+
 const List = styled.li`
   border: black solid;
   list-style-type: none;
-  margin: 10px auto;
+  margin: 10px 35px 15px 0px;
+`;
+
+const ListIn = styled.li`
+  border: black solid;
+  list-style-type: none;
+  margin: 10px 30px;
 `;
 
 const EachComment = styled.li`
   border: blue solid;
   list-style-type: none;
-  margin: 10px auto;
+  margin: 10px 35px 15px 0px;
 `;
 
 const Section = styled.section`
@@ -102,12 +114,12 @@ const Body = ({
     postComment(commentToPost, article.article_id)
       .then((response) => {
         setMyComments((currentComments) => {
-          return [...currentComments, response.comment];
+          return [...currentComments, ...response.comment];
         });
         setError(null);
       })
       .catch((err) => {
-        console.dir(err);
+        setError(err);
       });
   }
 
@@ -117,7 +129,7 @@ const Body = ({
       {loading && <p>Loading.....</p>}
       {article ? (
         <>
-          <List key={article.article_id}>
+          <ListIn key={article.article_id}>
             <Article>Article Title:</Article> {article.title}.<br />
             <Article>Topic:</Article> {article.topic}
             <br />
@@ -127,10 +139,31 @@ const Body = ({
             <br />
             <Article>Date Created:</Article>
             {article.created_at.substr(0, 10)}
-          </List>
+          </ListIn>
           <h2>Comments: </h2>
           <ul>
             {myComments.map((comment) => {
+              if (comment.author === user.users[0].username) {
+                return (
+                  <EachComment key={comment.comment_id}>
+                    <CommentList>Author: </CommentList> {comment.author} <br />
+                    <CommentList>Comment: </CommentList> {comment.body}
+                    <br />
+                    <CommentList>Date Created:</CommentList>
+                    {comment.created_at.substr(0, 10)}
+                    <br />
+                    <br />
+                    <CommentList>
+                      Votes:{" "}
+                      <CommentVoter
+                        votes={comment.votes}
+                        id={comment.comment_id}
+                      />
+                    </CommentList>
+                    <DeleteButton>Delete my comment!</DeleteButton>
+                  </EachComment>
+                );
+              }
               return (
                 <EachComment key={comment.comment_id}>
                   <CommentList>Author: </CommentList> {comment.author} <br />
@@ -154,7 +187,7 @@ const Body = ({
           <AddComment>Add a comment: </AddComment>
           <p>User: {`${user.users[0].username}`}</p>
           <form onSubmit={handleSubmit} action="">
-            <CommentToAdd name="comment_body" cols="30" rows="10" />
+            <CommentToAdd name="comment_body" cols="30" rows="10" required />
             <br />
             <SubmitComment type="submit">Submit</SubmitComment>
           </form>
