@@ -6,6 +6,10 @@ Welcome to NC-News! A website dedicated to give users the ability to share their
 
 #### [github.com/Elbeera/My-NC-News-BE](https://github.com/Elbeera/My-NC-News-BE)
 
+<br />
+
+### The project:
+
 **Requirements to run the Webpage:**
 
 The Webpage is created using React. `Node.js v16` and `React v17` or higher are required to run the Webpage.
