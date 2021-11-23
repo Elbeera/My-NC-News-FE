@@ -2,6 +2,10 @@
 
 Welcome to NC-News! A website dedicated to give users the ability to share their thoughts with one another and receive feedback from other users.
 
+### Back End:
+
+#### [github.com/Elbeera/My-NC-News-BE](https://github.com/Elbeera/My-NC-News-BE)
+
 ### The project:
 
 **Requirements to run the Webpage:**
@@ -22,7 +26,4 @@ Fork and clone this repository, run `npm install` to install all required depend
 Feel free to use any of the above users to explore!
 
 <br />
-
-### Back End:
-
-#### [github.com/Elbeera/My-NC-News-BE](https://github.com/Elbeera/My-NC-News-BE)
+ ![responsive target](./src/images/HomePage.png)
