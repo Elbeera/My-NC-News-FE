@@ -27,3 +27,4 @@ Feel free to use any of the above users to explore!
 
 <br />
  ![responsive target](./src/images/HomePage.png)
+ ![Alt text](./src/images/HomePage.png "Title")
