@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Section = styled.section`
-  background-color: lightblue;
+  background-color: #eb1717;
   padding: 20px;
-  margin: 5px 0px;
 `;
 
 const Title = styled.h1`
   text-align: center;
+  color: white;
+  text-decoration: none;
 `;
 
 const ProfileImage = styled.img`
@@ -25,7 +26,7 @@ const Header = ({ user, setUser }) => {
   return (
     <Section>
       <Link to="/">
-        <Title>NorthCoder's News!</Title>
+        <Title>NC News</Title>
       </Link>
       {user && (
         <>

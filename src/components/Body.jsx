@@ -4,6 +4,7 @@ import { UserContext } from "../context/User";
 import { getArticles, getCommentsByArticleId, postComment } from "../utils/api";
 import { CommentVoter, ArticleVoter } from "./IncVotes";
 import styled from "styled-components";
+import Background from "../images/NCNewsBG.jpeg";
 
 const Article = styled.span`
   font-weight: bold;
@@ -14,9 +15,20 @@ const CommentList = styled.span`
 `;
 
 const DeleteButton = styled.button`
+  color: #e3e1e1;
+  height: 30px;
+  border-radius: 15%;
   margin: 5px;
-  background-color: Transparent;
+  background-color: #eb1717;
+  border: none;
   font-weight: bold;
+`;
+
+const Seemore = styled.button`
+  padding: 5px;
+  margin-bottom: 10px;
+  border: none;
+  background: transparent;
 `;
 
 const List = styled.li`
@@ -26,26 +38,23 @@ const List = styled.li`
 `;
 
 const ListIn = styled.li`
-  border: black solid;
+  border: none;
   list-style-type: none;
-  margin: 10px 30px;
+  margin: 100px 30px;
 `;
 
 const EachComment = styled.li`
-  border: blue solid;
+  border: #3baaad solid;
   list-style-type: none;
   margin: 10px 35px 15px 0px;
 `;
 
 const Section = styled.section`
-  border-radius: 3%;
-  background-color: lightgreen;
   margin: 0;
   padding: 10px;
 `;
 
 const AddComment = styled.h3`
-  border-top: black solid;
   width: auto;
 `;
 
@@ -55,6 +64,10 @@ const CommentToAdd = styled.textarea`
 `;
 
 const SubmitComment = styled.button`
+  color: #e3e1e1;
+  background-color: #3baaad;
+  border: none;
+  border-radius: 15%;
   margin: 10px;
   width: 100px;
   padding: 8px;
@@ -124,7 +137,7 @@ const Body = ({
   }
 
   return (
-    <Section>
+    <Section style={{ backgroundImage: `url(${Background})` }}>
       {error && <p>{error.response.data.msg}</p>}
       {loading && <p>Loading.....</p>}
       {article ? (
@@ -210,14 +223,14 @@ const Body = ({
                   Votes:
                   <ArticleVoter votes={article.votes} id={article.article_id} />
                 </Article>
-                <button
+                <Seemore
                   onClick={() => {
                     setArticle(article);
                     setViewComments(true);
                   }}
                 >
                   See more...
-                </button>
+                </Seemore>
               </List>
             );
           })}

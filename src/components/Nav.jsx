@@ -4,9 +4,8 @@ import styled from "styled-components";
 
 const Section = styled.section`
   background-color: #3baaad;
-  border-radius: 15%;
   padding: 5px;
-  margin: 5px;
+  height: 30px;
 `;
 
 const Label = styled.label`

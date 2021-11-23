@@ -5,6 +5,7 @@ import { useState } from "react";
 import { getUserByName } from "../utils/api";
 import { UserContext } from "../context/User";
 import { useContext } from "react";
+import Background from "../images/NCNewsBG.jpeg";
 
 const HomePage = () => {
   const { setUser } = useContext(UserContext);
@@ -26,26 +27,28 @@ const HomePage = () => {
 
   return (
     <>
-      <Section>
+      <Section style={{ backgroundImage: `url(${Background})` }}>
         <Header />
-        <h2>Please Sign In Below! </h2>
+        <Sign>
+          <h2>Please Sign In Below! </h2>
 
-        <form action="" onSubmit={handleSubmit}>
-          <label htmlFor="username">Username: </label>
+          <form action="" onSubmit={handleSubmit}>
+            <label htmlFor="username">Username: </label>
 
-          <input
-            type="text"
-            required
-            name="username"
-            value={newUser}
-            onChange={(e) => {
-              setNewUser(e.target.value);
-            }}
-          />
-
-          <Button type="submit">Log in</Button>
-        </form>
-        {error && <p>{error.response.data.msg}</p>}
+            <input
+              type="text"
+              required
+              name="username"
+              value={newUser}
+              onChange={(e) => {
+                setNewUser(e.target.value);
+              }}
+            />
+            <br />
+            <Button type="submit">Log in</Button>
+          </form>
+          {error && <p>{error.response.data.msg}</p>}
+        </Sign>
         <Sub>Thank you for visiting our webpage!</Sub>
       </Section>
       <Footer />
@@ -54,18 +57,40 @@ const HomePage = () => {
 };
 
 const Section = styled.section`
-  background-color: lightgreen;
+  background-color: #e3e1e1;
   height: 800px;
   text-align: center;
 `;
 
+const Sign = styled.section`
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 5%;
+  border-radius: 15%;
+  margin-right: 40%;
+  margin-left: 40%;
+  height: 250px;
+  border-width: 5px;
+  border: solid;
+  border-color: #eb1717;
+  text align: center;
+`;
+
 const Button = styled.button`
-  margin-left: 10px;
+  margin-top: 10px;
+  width: 100px;
+  color: #e3e1e1;
+  border: none;
+  height: 30px;
+  border-radius: 15%;
+  background-color: #eb1717;
 `;
 
 const Sub = styled.p`
+  margin-top: 50px;
   text-align: center;
-  margin-top: 500px;
   font-weight: bold;
 `;
 

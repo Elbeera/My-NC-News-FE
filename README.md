@@ -11,6 +11,16 @@ The Webpage is created using React. `Node.js v16` and `React v17` or higher are 
 **How to run:**
 
 Fork and clone this repository, run `npm install` to install all required dependencies. Then run `npm run start` in the terminal.
+
+**Current users:**
+
+1. jessjelly
+2. weegembump
+3. happyamy2016
+4. cooljmessy
+
+Feel free to use any of the above users to explore!
+
 <br />
 
 ### Back End:
