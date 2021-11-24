@@ -27,4 +27,5 @@ Feel free to use any of the above users to explore!
 
 <br />
 
+**sneak-peek:**
 ![Alt text](./src/images/HomePage.png)
